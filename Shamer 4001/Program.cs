@@ -24,12 +24,12 @@ namespace Shamer_4001
             _cmdh = new CommandHandler(_client, _cmds);
             await _cmdh.InstallCommandsAsync();
             
-            await _client.LoginAsync(TokenType.Bot, "NzY4ODkxNTI3MjgzNzM2NjM3.X5HECQ.8BBBIUAbtGEMMIPjlt9IWawhnF8");
+            await _client.LoginAsync(TokenType.Bot, "NzY4ODkxNTI3MjgzNzM2NjM3.X5HECQ.iT69lBuybIJI695UApbWnSQAl90");
             await _client.StartAsync();
             await Task.Delay(-1);
         }
 
-        private Task Log(LogMessage msg)
+        public static Task Log(LogMessage msg)
         {
             Console.WriteLine(msg.ToString());
             return Task.CompletedTask;

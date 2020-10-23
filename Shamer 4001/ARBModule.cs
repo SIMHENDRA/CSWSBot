@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Shamer_4001
         [Command("shame")]
         public async Task ShameAsync(string ign, int toPrint = 3, int minGames = 50)
         {
+            await Program.Log(new LogMessage(LogSeverity.Info, "shameAsync", "Shame Invoked"));
             await ReplyAsync($"shame {ign} {toPrint} {minGames}");
         }
 

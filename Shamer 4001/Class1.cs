@@ -6,6 +6,6 @@ namespace Shamer_4001
 {
     class Class1
     {
-        //This is a new comment
+        //This is a new comment +1
     }
 }
