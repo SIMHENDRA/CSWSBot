@@ -12,7 +12,7 @@ namespace Shamer_4001
     //Includes webscraping methods and defines instance members that all commands require. 
     //Gets html elements and converts them to an organized Vehicle object.
     //Has a list of vehicles which represents the vehicle/stats that will be sent to discord embed.
-    public abstract class TSEntry  
+    public abstract class TSEntry
     {
         public List<Vehicle> retList;
         public int vtype; // 0: Planes 1: Tanks
@@ -30,12 +30,16 @@ namespace Shamer_4001
         public HtmlNode[] GetTrArray() //Obtain elements of correct thunderskill table (arcade||RB & Air||Ground)
         {
             var wc = new WebClient();
+            
+            
             string res = wc.DownloadString($"http://thunderskill.com/en/stat/{ign}/vehicles/{mode}");
+
             var doc = new HtmlDocument();
             doc.LoadHtml(res);
-
-            var ret = doc.DocumentNode.Descendants("table").ToArray()[vtype].Descendants("tr").ToArray();
+            var ret = doc.DocumentNode.Descendants("table").ToArray()[vtype].Descendants("tr").ToArray(); 
             return ret;
+
+
         }
 
         public static string GetNameFromTr(HtmlNode tr)
@@ -48,8 +52,12 @@ namespace Shamer_4001
         {
             return tr.Elements("td").ToArray()[1].Element("span").InnerText;
         }
-
-        public Vehicle TrToVehicle(HtmlNode tr) //Take table element (one of e's in array returned by GetTrArray()) use it to create Vehicle obj
+        public Vehicle TrToVehicle(HtmlNode tr)
+        {
+            try { return UnsafeTrToVehicle(tr); }
+            catch { return null; }
+        }
+        public Vehicle UnsafeTrToVehicle(HtmlNode tr) //Take table element (one of e's in array returned by GetTrArray()) use it to create Vehicle obj
         {
             var ret = new Vehicle
             {
@@ -80,7 +88,7 @@ namespace Shamer_4001
         }
 
         //public abstract bool VComp(Vehicle A, Vehicle B); //compare vehicles for adding to ret list. depends on flex, shame.
-
+        
         public abstract void BuildRet();
 
         public void PrintList()
@@ -88,6 +96,7 @@ namespace Shamer_4001
             foreach (Vehicle v in retList)
             {
                 v.print(); 
+                
             }
         }
 

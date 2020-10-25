@@ -21,11 +21,7 @@ namespace Shamer_4001.Classes
             var trs = GetTrArray();
             foreach (var tr in trs)
             {
-                try
-                {
-                    //Console.WriteLine(GetNameFromTr(tr));
-                    if (GetNameFromTr(tr).Contains(search)) retList.Add(TrToVehicle(tr));
-                }
+                try { if (GetNameFromTr(tr).Contains(search)) retList.Add(TrToVehicle(tr)); }
                 catch { continue; }
             }
         }

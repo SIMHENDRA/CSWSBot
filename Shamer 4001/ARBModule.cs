@@ -39,5 +39,13 @@ namespace Shamer_4001
             Console.WriteLine($"{resp.retList.Count}");
             await ReplyAsync($"churry {ign} {vehicle}");
         }
+
+        [Command("TestGrab")]
+        public async Task TestGrab(string ign)
+        {
+            var resp = new VehicleGrabber(0, "r", ign);
+            await ReplyAsync("Reply Reached");
+        }
+
     }
 }
