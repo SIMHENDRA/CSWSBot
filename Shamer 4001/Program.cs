@@ -17,6 +17,8 @@ namespace Shamer_4001
 
         public async Task MainAsync()
         {
+            
+
             _client = new DiscordSocketClient();
             _client.Log += Log;
 
@@ -24,7 +26,7 @@ namespace Shamer_4001
             _cmdh = new CommandHandler(_client, _cmds);
             await _cmdh.InstallCommandsAsync();
             
-            await _client.LoginAsync(TokenType.Bot, "NzY4ODkxNTI3MjgzNzM2NjM3.X5HECQ.iT69lBuybIJI695UApbWnSQAl90");
+            await _client.LoginAsync(TokenType.Bot, "");
             await _client.StartAsync();
             await Task.Delay(-1);
         }
