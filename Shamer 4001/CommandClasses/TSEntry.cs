@@ -14,7 +14,7 @@ namespace Shamer_4001
     //Has a list of vehicles which represents the vehicle/stats that will be sent to discord embed.
     public abstract class TSEntry
     {
-        public List<Vehicle> retList;
+        public List<Vehicle> retList; 
         public int vtype; // 0: Planes 1: Tanks
         public string mode; // a: arcade r: realistic s: simulator
         public string ign;
@@ -37,7 +37,7 @@ namespace Shamer_4001
             var doc = new HtmlDocument();
             doc.LoadHtml(res);
             var ret = doc.DocumentNode.Descendants("table").ToArray()[vtype].Descendants("tr").ToArray(); 
-            if (TrToVehicle(ret[10]) is null) throw new Exception("Name oof"); 
+            if (TrToVehicle(ret[10]) is null) throw new Exception("IGN NOT IN TS"); 
             return ret;
 
 

@@ -9,33 +9,35 @@ namespace Shamer_4001.Classes
     {
         public static Embed[] VecListToEmbed(List<Vehicle> retList, int vtype, string ign)
         {
-            Embed[] ret = new Embed[retList.Count];
+            List<Embed> ret = new List<Embed>();
 
             if (vtype == 0)
             {
                 for (int i = 0; i<retList.Count; i++)
                 {
-                    ret[i] = AirBuilder(retList[i])
-                        .WithFooter($"Page {i}  BOT BY SSN!")
+                    if (retList[i] is null) continue;
+                    ret.Add(AirBuilder(retList[i])
+                        .WithFooter($"Page {i+1}  BOT BY SSN!")
                         .WithAuthor(ign)
                         .AddField("For more info", $"[Thunderskill Page](http://thunderskill.com/en/stat/{ign}/vehicles/r)")
-                        .Build();
+                        .Build());
                 }
             }
             else
             {
                 for (int i = 0; i < retList.Count; i++)
                 {
-                    ret[i] = GroundBuilder(retList[i])
-                        .WithFooter($"Page {i}  BOT BY SSN!")
+                    if (retList[i] is null) continue;
+                    ret.Add(GroundBuilder(retList[i])
+                        .WithFooter($"Page {i+1}  BOT BY SSN!")
                         .WithAuthor(ign)
                         .AddField("For more info", $"[Thunderskill Page](http://thunderskill.com/en/stat/{ign}/vehicles/r)")
-                        .Build();
+                        .Build());
                 }
             }
 
 
-            return ret;
+            return ret.ToArray();
         }
 
 
@@ -47,8 +49,8 @@ namespace Shamer_4001.Classes
             var Winrate = new EmbedFieldBuilder().WithValue("Winrate")
                 .WithName((float.Parse(v.fields["Victories"])/(float.Parse(v.fields["Battles"]))).ToString())
                 .WithIsInline(true);
-            var KD = new EmbedFieldBuilder().WithValue("Kills/Death").WithName(v.fields["Air frags / death"]).WithIsInline(true);
-            var KB = new EmbedFieldBuilder().WithValue("Kills/Battle").WithName(v.fields["Air frags / battle"]).WithIsInline(true);
+            var KD = new EmbedFieldBuilder().WithValue("Kills/Death").WithName(v.fields.ContainsKey("Air frags / death") ? v.fields["Air frags / death"] : "N/A").WithIsInline(true);
+            var KB = new EmbedFieldBuilder().WithValue("Kills/Battle").WithName(v.fields.ContainsKey("Air frags / battle") ? v.fields["Air frags / battle"] : "N/A").WithIsInline(true);
             return new EmbedBuilder()
                 .AddField(Battles)
                 .AddField(Kills)
@@ -68,8 +70,8 @@ namespace Shamer_4001.Classes
             var Winrate = new EmbedFieldBuilder().WithValue("Winrate")
                 .WithName((float.Parse(v.fields["Victories"]) / (float.Parse(v.fields["Battles"]))).ToString())
                 .WithIsInline(true);
-            var KD = new EmbedFieldBuilder().WithValue("Kills/Death").WithName(v.fields["Ground frags / death"]).WithIsInline(true);
-            var KB = new EmbedFieldBuilder().WithValue("Kills/Battle").WithName(v.fields["Ground frags / battle"]).WithIsInline(true);
+            var KD = new EmbedFieldBuilder().WithValue("Kills/Death").WithName(v.fields.ContainsKey("Ground frags / death") ? v.fields["Ground frags / death"] : "N/A").WithIsInline(true);
+            var KB = new EmbedFieldBuilder().WithValue("Kills/Battle").WithName(v.fields.ContainsKey("Ground frags / battle") ? v.fields["Ground frags / battle"] : "N/A").WithIsInline(true);
             return new EmbedBuilder()
                 .AddField(Battles)
                 .AddField(Kills)

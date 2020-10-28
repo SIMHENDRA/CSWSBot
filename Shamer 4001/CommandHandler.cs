@@ -37,7 +37,7 @@ namespace Shamer_4001
             {
                 Console.WriteLine(result.ErrorReason);
                 Console.WriteLine(result.Error);
-                await context.Channel.SendMessageAsync("OncCommandExecutedAsync says Failed");
+                await context.Channel.SendMessageAsync($"`l2typel2typel2typel2typel2typel2typel2typel2typel2typel2typel2typel2typel2type`{result.ErrorReason}`l2typel2typel2typel2typel2typel2typel2typel2typel2typel2typel2type`");
             }
             //else return Task.CompletedTask;
         }
@@ -49,13 +49,13 @@ namespace Shamer_4001
 
             int argPos = 0;
 
-            if (!message.HasCharPrefix('!', ref argPos) ||
+            if (!message.HasCharPrefix('&', ref argPos) ||
                     message.HasMentionPrefix(_client.CurrentUser, ref argPos) ||
                     message.Author.IsBot) return;
             var context = new SocketCommandContext(_client, message);
-            var result = await _commands.ExecuteAsync(context: context, argPos: argPos, services: _provider);
-            if (!result.IsSuccess)
-                await context.Channel.SendMessageAsync(result.ErrorReason);
+            _ = await _commands.ExecuteAsync(context: context, argPos: argPos, services: _provider);
+            //if (!result.IsSuccess)
+            //    await context.Channel.SendMessageAsync($"HandleCommandAsync() Error message : { result.ErrorReason}");
         }
 
         public async Task LogAsync(LogMessage logMessage)
@@ -63,7 +63,7 @@ namespace Shamer_4001
             if (logMessage.Exception is CommandException cmdException)
             {
                 // We can tell the user that something unexpected has happened
-                await cmdException.Context.Channel.SendMessageAsync("Something went catastrophically wrong!");
+                //await cmdException.Context.Channel.SendMessageAsync("Something went catastrophically wrong!");
 
                 // We can also log this incident
                 Console.WriteLine($"{cmdException.Context.User} failed to execute '{cmdException.Command.Name}' in {cmdException.Context.Channel}.");

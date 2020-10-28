@@ -15,7 +15,7 @@ namespace Shamer_4001
         public InteractiveService Interactive { get; private set; }
         public IUserMessage Message { get; private set; }
 
-        public RunMode RunMode => RunMode.Sync;
+        public RunMode RunMode => RunMode.Async;
         public ICriterion<SocketReaction> Criterion => _criterion;
         public TimeSpan? Timeout => options.Timeout;
 

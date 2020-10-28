@@ -15,13 +15,9 @@ namespace Shamer_4001
             => new Program().MainAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient _client;
-        //private CommandService _cmds;
-        //private CommandHandler _cmdh;
 
         public async Task MainAsync()
         {
-            
-
             _client = new DiscordSocketClient();
             _client.Log += Log;
 
@@ -32,12 +28,7 @@ namespace Shamer_4001
                 .AddSingleton(_client)
                 .BuildServiceProvider();
 
-            await services.GetRequiredService<CommandHandler>().InstallCommandsAsync(services);
-
-            //_cmds = new CommandService();
-            //_cmdh = new CommandHandler(_client, _cmds);
-            //await _cmdh.InstallCommandsAsync();
-            
+            await services.GetRequiredService<CommandHandler>().InstallCommandsAsync(services);            
             await _client.LoginAsync(TokenType.Bot, "");
             await _client.StartAsync();
             await Task.Delay(-1);
@@ -45,7 +36,7 @@ namespace Shamer_4001
 
         public static Task Log(LogMessage msg)
         {
-            Console.WriteLine(msg.ToString());
+            Console.WriteLine($"Log in program.cs : {msg.ToString()}");
             return Task.CompletedTask;
         }
 
