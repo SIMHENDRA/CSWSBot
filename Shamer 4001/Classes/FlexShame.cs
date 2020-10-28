@@ -7,7 +7,7 @@ namespace Shamer_4001.Classes
 {
     public class FlexShame : TSEntry
     {
-
+        
         public int mg; //min games
         public int num; // num vs to print (retList size)
         public string met; //Airfrags/battle, groundfrags/battle, airfrags/game, ... etc. Any numeric stat in Vehicle dictionary to compare by.
@@ -42,17 +42,19 @@ namespace Shamer_4001.Classes
             {
                 retList.Add(null);
             }
+
+            BuildRet();
         }
 
         public bool FlexCompare(Vehicle A, Vehicle B) //A is candidate, B is retList element
         {
-            if (B != null)
+            /*if (B != null)
             {
                 Console.WriteLine($"A: {A.FullName} B: {B.FullName}");
                 Console.WriteLine($"Comparing {float.Parse(A.fields[met])} to {float.Parse(B.fields[met])}");
-            }
+            }*/
             bool ret = (B==null) || (float.Parse(A.fields[met]) > float.Parse(B.fields[met]));
-            Console.WriteLine($"Returning {ret}");
+            //Console.WriteLine($"Returning {ret}");
             return ret;
         }
 
@@ -65,18 +67,17 @@ namespace Shamer_4001.Classes
         public override void BuildRet()
         {
             HtmlNode[] trs;
-            try { trs = GetTrArray(); }
-            catch { throw new Exception("Bad Name."); }
+            trs = GetTrArray();
             //Console.WriteLine($"TrArrayLength : {trs.Length}");
             //Console.WriteLine($"initial retListLength : {retList.Count}");
-
             Vehicle temp;
             foreach (var tr in trs)
             {
                 temp = TrToVehicle(tr);
                 if (temp is null) continue;
-                if (float.Parse(temp.fields["Battles"]) < mg) continue;
-                if (!temp.fields.ContainsKey(met)) continue;
+                else if (float.Parse(temp.fields["Battles"]) < mg) continue;
+                else if (!temp.fields.ContainsKey(met)) continue;
+                else if (temp.role.Contains("bomber")) continue;
 
                 for (int ind = num-1; ind>=0; ind--) //Compare candidate to retList entries
                 {
@@ -95,7 +96,5 @@ namespace Shamer_4001.Classes
                 if (retList.Count > num) retList.RemoveAt(num);                               
             }
         }
-
-
     }
 }

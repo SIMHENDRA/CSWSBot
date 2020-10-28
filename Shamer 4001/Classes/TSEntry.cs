@@ -37,10 +37,12 @@ namespace Shamer_4001
             var doc = new HtmlDocument();
             doc.LoadHtml(res);
             var ret = doc.DocumentNode.Descendants("table").ToArray()[vtype].Descendants("tr").ToArray(); 
+            if (TrToVehicle(ret[10]) is null) throw new Exception("Name oof"); 
             return ret;
 
 
         }
+
 
         public static string GetNameFromTr(HtmlNode tr)
         {

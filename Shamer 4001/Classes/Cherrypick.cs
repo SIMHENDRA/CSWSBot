@@ -13,6 +13,7 @@ namespace Shamer_4001.Classes
         public Cherrypick(int v, string md, string un, string inp) : base(v, md, un)
         {
             search = Regex.Replace(inp, "[^A-Za-z0-9]", "").ToLower();
+            BuildRet();
         }
 
         public override void BuildRet()

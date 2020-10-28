@@ -1,7 +1,10 @@
 ﻿using Discord;
+using Discord.Addons.Interactive;
 using Discord.Commands;
 using Discord.WebSocket;
+using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Security.Authentication.ExtendedProtection;
 using System.Threading.Tasks;
 
 namespace Shamer_4001
@@ -12,8 +15,8 @@ namespace Shamer_4001
             => new Program().MainAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient _client;
-        private CommandService _cmds;
-        private CommandHandler _cmdh;
+        //private CommandService _cmds;
+        //private CommandHandler _cmdh;
 
         public async Task MainAsync()
         {
@@ -22,9 +25,18 @@ namespace Shamer_4001
             _client = new DiscordSocketClient();
             _client.Log += Log;
 
-            _cmds = new CommandService();
-            _cmdh = new CommandHandler(_client, _cmds);
-            await _cmdh.InstallCommandsAsync();
+            var services = new ServiceCollection()
+                .AddSingleton<CommandService>()
+                .AddSingleton<CommandHandler>()
+                .AddSingleton<InteractiveService>()
+                .AddSingleton(_client)
+                .BuildServiceProvider();
+
+            await services.GetRequiredService<CommandHandler>().InstallCommandsAsync(services);
+
+            //_cmds = new CommandService();
+            //_cmdh = new CommandHandler(_client, _cmds);
+            //await _cmdh.InstallCommandsAsync();
             
             await _client.LoginAsync(TokenType.Bot, "");
             await _client.StartAsync();
