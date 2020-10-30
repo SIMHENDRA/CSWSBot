@@ -38,6 +38,20 @@ namespace Shamer_4001
             await NewPagedReplyAsync(VehiclesToEmbeds.VecListToEmbed(resp.retList, resp.vtype, resp.ign), resp.ign);
         }
 
+        [Command("shamewr", RunMode = RunMode.Async)]
+        public async Task ShamewrAsync(string ign, int minGames = 50, int toPrint = 10)
+        {
+            var resp = new FlexShame(0, "r", ign, minGames, toPrint, false, "wr");
+            await NewPagedReplyAsync(VehiclesToEmbeds.VecListToEmbed(resp.retList, resp.vtype, resp.ign), resp.ign);
+        }
+
+        [Command("flexwr", RunMode = RunMode.Async)]
+        public async Task FlexwrAsync(string ign, int minGames = 50, int toPrint = 10)
+        {
+            var resp = new FlexShame(0, "r", ign, minGames, toPrint, true, "wr");
+            await NewPagedReplyAsync(VehiclesToEmbeds.VecListToEmbed(resp.retList, resp.vtype, resp.ign), resp.ign);
+        }
+
         [Command("cherrypick", RunMode = RunMode.Async)]
         public async Task CPAsync(string ign, string vehicle)
         {

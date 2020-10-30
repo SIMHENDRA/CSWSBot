@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,6 +25,17 @@ namespace Shamer_4001
         public void AddField(string key, string val)
         {
             fields.Add(key, val);
+
+            if (fields.ContainsKey("Winrate")) return;
+            else if (!(fields.ContainsKey("Battles") && fields.ContainsKey("Victories"))) return;
+            else if (int.Parse(fields["Battles"]) == 0) return;
+
+            float wr =(float.Parse(fields["Victories"]) / (float.Parse(fields["Battles"])));
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.PercentDecimalDigits = 1;
+            fields.Add("Winrate", wr.ToString("P", nfi));
+            fields.Add("WinrateFloat", wr.ToString());
+            return;           
         }
 
         public void print()

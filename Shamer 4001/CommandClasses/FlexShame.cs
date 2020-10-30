@@ -27,10 +27,14 @@ namespace Shamer_4001.Classes
                 else met = "Ground frags / death";
 
             }
-            else
+            else if (metric == "kb")
             {
                 if (v == 0) met = "Air frags / battle";
                 else met = "Ground frags / battle";
+            }
+            else //met = "wr"
+            {
+                met = "WinrateFloat";
             }
 
             FS = fs;

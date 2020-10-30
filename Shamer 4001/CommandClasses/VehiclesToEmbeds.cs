@@ -47,7 +47,7 @@ namespace Shamer_4001.Classes
             var Kills = new EmbedFieldBuilder().WithValue("Kills").WithName(v.fields["Overall air frags"]).WithIsInline(true);
             var Deaths = new EmbedFieldBuilder().WithValue("Deaths").WithName(v.fields["Deaths"]).WithIsInline(true);
             var Winrate = new EmbedFieldBuilder().WithValue("Winrate")
-                .WithName((float.Parse(v.fields["Victories"])/(float.Parse(v.fields["Battles"]))).ToString())
+                .WithName(v.fields["Winrate"])
                 .WithIsInline(true);
             var KD = new EmbedFieldBuilder().WithValue("Kills/Death").WithName(v.fields.ContainsKey("Air frags / death") ? v.fields["Air frags / death"] : "N/A").WithIsInline(true);
             var KB = new EmbedFieldBuilder().WithValue("Kills/Battle").WithName(v.fields.ContainsKey("Air frags / battle") ? v.fields["Air frags / battle"] : "N/A").WithIsInline(true);
