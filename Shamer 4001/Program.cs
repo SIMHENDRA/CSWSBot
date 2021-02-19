@@ -29,7 +29,7 @@ namespace Shamer_4001
                 .BuildServiceProvider();
 
             await services.GetRequiredService<CommandHandler>().InstallCommandsAsync(services);            
-            await _client.LoginAsync(TokenType.Bot, "");
+            await _client.LoginAsync(TokenType.Bot, "NzQ3ODkyNjYzNDUzMzUxOTQ3.X0VfUg.NbDf5lcL1tQN6SbLOoHTyDxr0OI");
             await _client.StartAsync();
             await Task.Delay(-1);
         }

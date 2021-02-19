@@ -15,7 +15,7 @@ namespace Shamer_4001.Classes
             {
                 for (int i = 0; i<retList.Count; i++)
                 {
-                    if (retList[i] is null) continue;
+                    if (retList[i] is null || !retList[i].fields.ContainsKey("Winrate")) continue;
                     ret.Add(AirBuilder(retList[i])
                         .WithFooter($"Page {i+1}  BOT BY SSN!")
                         .WithAuthor(ign)
@@ -27,7 +27,7 @@ namespace Shamer_4001.Classes
             {
                 for (int i = 0; i < retList.Count; i++)
                 {
-                    if (retList[i] is null) continue;
+                    if (retList[i] is null || !retList[i].fields.ContainsKey("Winrate")) continue;
                     ret.Add(GroundBuilder(retList[i])
                         .WithFooter($"Page {i+1}  BOT BY SSN!")
                         .WithAuthor(ign)
